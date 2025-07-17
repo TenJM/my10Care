@@ -6,6 +6,7 @@ from flask_jwt_extended import (
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
+import os
 
 # Initialize app
 app = Flask(__name__)
@@ -144,8 +145,11 @@ def get_products():
 # ---------------------------
 # Run the server
 # ---------------------------
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
+
 
